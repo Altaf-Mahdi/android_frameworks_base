@@ -574,6 +574,14 @@ public interface WindowManager extends ViewManager {
         public static final int TYPE_KEYGUARD_PANEL = FIRST_SYSTEM_WINDOW+998;
 
         /**
+         * Window type: Recents. Same layer as {@link #TYPE_SYSTEM_DIALOG} but only appears on
+         * one user's screen.
+         * In multiuser systems shows on all users' windows.
+         * @hide
+         */
+        public static final int TYPE_RECENTS_OVERLAY = FIRST_SYSTEM_WINDOW+33;
+
+        /**
          * End of types of system windows.
          */
         public static final int LAST_SYSTEM_WINDOW      = 2999;
