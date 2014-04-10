@@ -4314,6 +4314,10 @@ public class PhoneWindowManager implements WindowManagerPolicy {
         }
     }
 
+    public Rect getContentRect() {
+        return new Rect(mContentLeft, mContentTop, mContentRight, mContentBottom);
+    }
+
     /** {@inheritDoc} */
     @Override
     public void layoutWindowLw(WindowState win, WindowState attached) {
