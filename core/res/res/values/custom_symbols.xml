@@ -42,10 +42,18 @@
   <!-- Developer settings - Kill app back press -->
   <java-symbol type="string" name="app_killed_message" />
 
-  <!-- Config.xml entries -->
+  <!-- Kill app delay -->
   <java-symbol type="integer" name="config_backKillTimeout" />
 
   <!-- Last app switch animations -->
   <java-symbol type="anim" name="last_app_in" />
   <java-symbol type="anim" name="last_app_out" />
+
+  <!-- Notification and battery light -->
+  <java-symbol type="bool" name="config_intrusiveNotificationLed" />
+  <java-symbol type="bool" name="config_multiColorNotificationLed" />
+  <java-symbol type="bool" name="config_intrusiveBatteryLed" />
+  <java-symbol type="bool" name="config_multiColorBatteryLed" />
+  <java-symbol type="array" name="notification_light_package_mapping" />
+  <java-symbol type="array" name="config_notificationNoAlertsVibePattern" />
 </resources>
