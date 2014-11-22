@@ -48,4 +48,7 @@
     <!-- label for item that screenshots in phone options dialog -->
     <string name="global_action_screenshot">Screenshot</string>
 
+    <!-- Long-press back kill application -->
+    <string name="app_killed_message">Application killed</string>
+
 </resources>
