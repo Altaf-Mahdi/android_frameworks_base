@@ -28,6 +28,7 @@ public interface ActivityStarter {
     void startPendingIntentDismissingKeyguard(PendingIntent intent);
     void startActivity(Intent intent, boolean dismissShade);
     void startActivity(Intent intent, boolean dismissShade, Callback callback);
+    void startAction(boolean dismissShade);
     void preventNextAnimation();
 
     interface Callback {
