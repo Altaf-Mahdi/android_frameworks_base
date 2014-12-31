@@ -26,6 +26,7 @@ import android.content.Intent;
 public interface ActivityStarter {
     void startActivity(Intent intent, boolean dismissShade);
     void startActivity(Intent intent, boolean dismissShade, Callback callback);
+    void startAction(boolean dismissShade);
     void preventNextAnimation();
 
     interface Callback {

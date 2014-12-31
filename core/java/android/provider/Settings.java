@@ -5907,6 +5907,13 @@ public final class Settings {
         public static final String LONG_PRESS_KILL_DELAY = "long_press_kill_delay";
 
         /**
+         * Wether to show a headsup enable/disable button in status bar header
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_SHOW_STATUS_BUTTON = "heads_up_show_status_button";
+
+        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
