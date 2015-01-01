@@ -98,6 +98,7 @@ public class LocationTile extends QSTile<QSTile.BooleanState> {
             final boolean wasEnabled = (Boolean) mState.value;
             MetricsLogger.action(mContext, getMetricsCategory(), !wasEnabled);
             mController.setLocationEnabled(!wasEnabled);
+            qsCollapsePanel();
         }
         mEnable.setAllowAnimation(true);
         mDisable.setAllowAnimation(true);

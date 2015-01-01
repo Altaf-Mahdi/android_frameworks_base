@@ -95,6 +95,7 @@ public class WifiTile extends QSTile<QSTile.SignalState> {
         mState.copyTo(mStateBeforeClick);
         MetricsLogger.action(mContext, getMetricsCategory(), !mState.enabled);
         mController.setWifiEnabled(!mState.enabled);
+        qsCollapsePanel();
     }
 
     @Override

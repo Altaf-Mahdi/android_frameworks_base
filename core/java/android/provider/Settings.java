@@ -5760,6 +5760,12 @@ public final class Settings {
          */
         public static final String QS_LOCATION_ADVANCED = "qs_location_advanced";
 
+        /** Whether to collapse panel when quick settings tile is pressed.
+         *
+         * @hide
+         */
+        public static final String QUICK_SETTINGS_COLLAPSE_PANEL = "quick_settings_collapse_panel";
+
         /**
          * This are the settings to be backed up.
          *
