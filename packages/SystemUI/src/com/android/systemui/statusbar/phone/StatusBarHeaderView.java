@@ -599,6 +599,7 @@ public class StatusBarHeaderView extends RelativeLayout implements View.OnClickL
             startHeadsUpActivity();
             updateHeadsUpButton();
         }
+        mQSPanel.vibrateTile(20);
     }
 
     private View.OnLongClickListener mLongClickListener =
