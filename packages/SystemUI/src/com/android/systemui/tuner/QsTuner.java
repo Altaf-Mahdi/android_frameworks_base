@@ -58,6 +58,8 @@ public class QsTuner extends Fragment implements Callback {
 
     private static final String TAG = "QsTuner";
 
+    protected static final String TILES_SETTING = "sysui_qs_tiles";
+
     private static final int MENU_RESET = Menu.FIRST;
 
     private DraggableQsPanel mQsPanel;
@@ -388,11 +390,6 @@ public class QsTuner extends Fragment implements Callback {
         public QSTileView createTileView(Context context) {
             mView = super.createTileView(context);
             return mView;
-        }
-
-        @Override
-        public boolean supportsDualTargets() {
-            return "wifi".equals(mSpec) || "bt".equals(mSpec);
         }
 
         @Override
