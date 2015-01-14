@@ -154,6 +154,7 @@ import com.android.internal.util.cm.WeatherController.WeatherInfo;
 import com.android.systemui.statusbar.policy.BluetoothControllerImpl;
 import com.android.systemui.statusbar.policy.BrightnessMirrorController;
 import com.android.systemui.statusbar.policy.CastControllerImpl;
+import com.android.systemui.statusbar.policy.Clock;
 import com.android.systemui.statusbar.policy.FlashlightController;
 import com.android.systemui.statusbar.policy.HeadsUpManager;
 import com.android.systemui.statusbar.policy.HotspotControllerImpl;
@@ -314,6 +315,14 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private int mWeatherTempState;
     private int mWeatherTempStyle;
 
+    // Clock
+    TextView mClockView;
+    Clock mClockController;
+    private int mClockLocation;
+
+    // the icons themselves
+    IconMerger mNotificationIcons;
+
     // expanded notifications
     NotificationPanelView mNotificationPanel; // the sliding/resizing panel within the notification window
     View mExpandedContents;
@@ -393,6 +402,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.STATUS_BAR_CLOCK),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -429,6 +441,43 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             if (oldWeatherState != mWeatherTempState) {
                 updateWeatherTextState(mWeatherController.getWeatherInfo().temp);
             }
+
+            mClockLocation = Settings.System.getInt(
+                    resolver, Settings.System.STATUS_BAR_CLOCK, Clock.STYLE_CLOCK_RIGHT);
+            updateClockView();
+        }
+    }
+
+    void updateClockView() {
+        mClockView.setVisibility(View.GONE);
+
+        switch (mClockLocation) {
+            default:
+            case Clock.STYLE_HIDE_CLOCK:
+                mClockView = (TextView) mStatusBarView.findViewById(R.id.clock);
+                // Don't set visibility here...
+                break;
+            case Clock.STYLE_CLOCK_RIGHT:
+                mClockView = (TextView) mStatusBarView.findViewById(R.id.clock);
+                mClockView.setVisibility(View.VISIBLE);
+                break;
+            case Clock.STYLE_CLOCK_CENTER:
+                mClockView = (TextView) mStatusBarView.findViewById(R.id.center_clock);
+                mClockView.setVisibility(View.VISIBLE);
+                break;
+            case Clock.STYLE_CLOCK_LEFT:
+                mClockView = (TextView) mStatusBarView.findViewById(R.id.left_clock);
+                mClockView.setVisibility(View.VISIBLE);
+                break;
+        }
+
+        setClockAndDateStatus();
+        mClockController.updateClockView(mClockView);
+    }
+
+    public void setClockAndDateStatus() {
+        if (mNotificationIcons != null) {
+            mNotificationIcons.setClockAndDateStatus(mClockLocation);
         }
     }
 
@@ -837,6 +886,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
         // figure out which pixel-format to use for the status bar.
         mPixelFormat = PixelFormat.OPAQUE;
+
+        mNotificationIcons = (IconMerger)mStatusBarView.findViewById(R.id.notificationIcons);
+        mClockView = (TextView) mStatusBarView.findViewById(R.id.clock);
+        mClockLocation = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.STATUS_BAR_CLOCK, Clock.STYLE_CLOCK_RIGHT);
+        if (mClockController == null) mClockController = new Clock(mContext, mClockView);
+        updateClockView();
 
         mStackScroller = (NotificationStackScrollLayout) mStatusBarWindow.findViewById(
                 R.id.notification_stack_scroller);
@@ -1640,6 +1696,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         }
 
         findAndUpdateMediaNotifications();
+    }
+
+    public void showClock(boolean show) {
+        mClockView.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
     public void findAndUpdateMediaNotifications() {
