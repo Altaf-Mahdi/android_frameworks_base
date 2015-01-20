@@ -266,6 +266,7 @@ public interface MetricsConstants {
     // Euphoria-OS
     // QS Tiles
     public static final int QS_NFC = 239;
+    public static final int QS_COMPASS = 240;
 
     // These constants must match those in the analytic pipeline, do not edit.
     // Add temporary values to the top of MetricsLogger instead.
