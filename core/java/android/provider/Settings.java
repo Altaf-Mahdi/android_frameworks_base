@@ -5755,6 +5755,7 @@ public final class Settings {
         public static final String QS_USE_MAIN_TILES = "sysui_qs_main_tiles";
 
         /**
+         * Whether detail view for the location tile is enabled
          * @hide
          */
         public static final String QS_LOCATION_ADVANCED = "qs_location_advanced";
