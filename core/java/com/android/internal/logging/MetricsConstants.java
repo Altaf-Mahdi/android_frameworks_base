@@ -269,6 +269,7 @@ public interface MetricsConstants {
     public static final int QS_COMPASS = 240;
     public static final int QS_LTE = 241;
     public static final int QS_SCREEN_TIMEOUT = 242;
+    public static final int QS_SCREENSHOT = 243;
 
     // These constants must match those in the analytic pipeline, do not edit.
     // Add temporary values to the top of MetricsLogger instead.
