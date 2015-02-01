@@ -46,4 +46,5 @@
     <string name="quick_settings_screen_off">Screen off</string>
     <string name="quick_settings_doze">Doze enabled</string>
     <string name="quick_settings_doze_off">Doze disabled</string>
+    <string name="quick_settings_usb_tether_label">USB tethering</string>
 </resources>
