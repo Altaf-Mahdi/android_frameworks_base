@@ -271,6 +271,7 @@ public interface MetricsConstants {
     public static final int QS_SCREEN_TIMEOUT = 242;
     public static final int QS_SCREENSHOT = 243;
     public static final int QS_BRIGHTNESS = 244;
+    public static final int QS_BATTERY_SAVER = 245;
 
     // These constants must match those in the analytic pipeline, do not edit.
     // Add temporary values to the top of MetricsLogger instead.
