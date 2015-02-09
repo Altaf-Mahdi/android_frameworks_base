@@ -40,4 +40,5 @@
     <string name="quick_settings_screen_timeout_detail_title">Screen timeout</string>
     <string name="quick_settings_lte_tile_title">LTE</string>
     <string name="quick_settings_screenshot">Screenshot</string>
+    <string name="quick_settings_brightness">Brightness</string>
 </resources>
