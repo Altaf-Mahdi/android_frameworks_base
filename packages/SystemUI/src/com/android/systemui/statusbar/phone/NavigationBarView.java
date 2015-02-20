@@ -31,6 +31,7 @@ import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.os.RemoteException;
 import android.provider.Settings;
 import android.util.AttributeSet;
@@ -38,6 +39,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.Display;
 import android.view.IDockedStackListener.Stub;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
@@ -93,6 +95,9 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
     // workaround for LayoutTransitions leaving the nav buttons in a weird state (bug 5549288)
     final static boolean WORKAROUND_INVALID_LAYOUT = true;
     final static int MSG_CHECK_INVALID_LAYOUT = 8686;
+
+    private GestureDetector mDoubleTapGesture;
+    private boolean mDoubleTapToSleep;
 
     private boolean mShowDpadArrowKeys;
 
@@ -208,6 +213,17 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
         mButtonDisatchers.put(R.id.recent_apps, new ButtonDispatcher(R.id.recent_apps));
         mButtonDisatchers.put(R.id.menu, new ButtonDispatcher(R.id.menu));
         mButtonDisatchers.put(R.id.ime_switcher, new ButtonDispatcher(R.id.ime_switcher));
+
+        mDoubleTapGesture = new GestureDetector(mContext,
+                new GestureDetector.SimpleOnGestureListener() {
+            @Override
+            public boolean onDoubleTap(MotionEvent e) {
+                PowerManager pm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
+                if (pm != null)
+                    pm.goToSleep(e.getEventTime());
+                return true;
+            }
+        });
     }
 
     public BarTransitions getBarTransitions() {
@@ -225,6 +241,9 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if (mDoubleTapToSleep) {
+            mDoubleTapGesture.onTouchEvent(event);
+        }
         if (mGestureHelper.onTouchEvent(event)) {
             return true;
         }
@@ -602,6 +621,7 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
 
         updateTaskSwitchHelper();
         setNavigationIconHints(mNavigationIconHints, true);
+        updateSettings();
     }
 
     private void updateTaskSwitchHelper() {
@@ -769,6 +789,8 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
         super.onAttachedToWindow();
         TunerService.get(getContext()).addTunable(this,
                 "cmsystem:" + CMSettings.System.NAVIGATION_BAR_MENU_ARROW_KEYS);
+        TunerService.get(getContext()).addTunable(this,
+                "system:" + Settings.System.DOUBLE_TAP_SLEEP_NAVBAR);
     }
 
     @Override
@@ -782,6 +804,9 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
         mShowDpadArrowKeys = CMSettings.System.getInt(getContext().getContentResolver(),
                 CMSettings.System.NAVIGATION_BAR_MENU_ARROW_KEYS, 0) != 0;
         setNavigationIconHints(mNavigationIconHints, true);
+
+        mDoubleTapToSleep = Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.DOUBLE_TAP_SLEEP_NAVBAR, 1) != 0;
     }
 
     public void updateDpadKeys() {
@@ -792,5 +817,10 @@ public class NavigationBarView extends LinearLayout implements TunerService.Tuna
             final int vis = showingIme ? View.VISIBLE : View.INVISIBLE;
             getDpadView().setVisibility(vis);
         }
+    }
+
+    private void updateSettings() {
+        mDoubleTapToSleep = Settings.System.getInt(getContext().getContentResolver(),
+                Settings.System.DOUBLE_TAP_SLEEP_NAVBAR, 1) != 0;
     }
 }
