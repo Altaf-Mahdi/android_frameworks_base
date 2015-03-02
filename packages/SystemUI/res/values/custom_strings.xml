@@ -44,4 +44,6 @@
     <string name="quick_settings_battery_saver">Battery saver</string>
     <string name="quick_settings_battery_saver_off">Battery saver off</string>
     <string name="quick_settings_screen_off">Screen off</string>
+    <string name="quick_settings_doze">Doze enabled</string>
+    <string name="quick_settings_doze_off">Doze disabled</string>
 </resources>
