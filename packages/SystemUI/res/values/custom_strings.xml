@@ -20,4 +20,7 @@
     <!-- Heads up toast -->
     <string name="heads_up_enabled">Heads up notifications enabled.</string>
     <string name="heads_up_disabled">Heads up notifications disabled.</string>
+
+    <!-- Weather string format in expanded statusbar header -->
+    <string name="weather_info_not_available">Weather informations not available</string>
 </resources>
