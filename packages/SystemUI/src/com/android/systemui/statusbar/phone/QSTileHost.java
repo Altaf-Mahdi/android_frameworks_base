@@ -25,6 +25,7 @@ import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Looper;
 import android.os.Process;
+import android.os.UserHandle;
 import android.provider.Settings;
 import android.util.Log;
 
@@ -300,7 +301,7 @@ public class QSTileHost implements QSTile.Host {
         final Resources res = mContext.getResources();
         final String defaultTileList = res.getString(R.string.quick_settings_tiles_default);
         String tileList = Settings.Secure.getStringForUser(mContext.getContentResolver(),
-                Settings.Secure.QS_TILES, mUserTracker.getCurrentUserId());
+                Settings.Secure.QS_TILES, UserHandle.USER_CURRENT);
         if (DEBUG) Log.d(TAG, "Config string: "+tileList);
         if (tileList == null) {
             tileList = res.getString(R.string.quick_settings_tiles);
