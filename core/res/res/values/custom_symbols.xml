@@ -18,6 +18,7 @@
 <resources>
   <!-- Package Manager -->
   <java-symbol type="array" name="config_disabledComponents" />
+  <java-symbol type="array" name="config_forceEnabledComponents" />
 
   <!-- Quick Settings tile defaults -->
   <java-symbol type="string" name="config_defaultQuickSettingsTiles" />
