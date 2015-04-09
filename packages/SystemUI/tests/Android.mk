@@ -43,4 +43,4 @@ LOCAL_CERTIFICATE := platform
 
 include frameworks/base/packages/SettingsLib/common.mk
 
-include $(BUILD_PACKAGE)
+#include $(BUILD_PACKAGE)
