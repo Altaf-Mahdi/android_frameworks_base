@@ -18,6 +18,7 @@ package com.android.systemui.statusbar.phone;
 
 import android.content.ComponentCallbacks2;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.os.Trace;
@@ -494,5 +495,9 @@ public class StatusBarKeyguardViewManager {
         if (mPhoneStatusBar.getNavigationBarView() != null) {
             mPhoneStatusBar.getNavigationBarView().setWakeAndUnlocking(true);
         }
+    }
+
+    public void setBackgroundBitmap(Bitmap bmp) {
+        mPhoneStatusBar.setBackgroundBitmap(bmp);
     }
 }

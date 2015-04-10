@@ -32,6 +32,9 @@ public class KeyguardServiceDelegate {
     private static final String TAG = "KeyguardServiceDelegate";
     private static final boolean DEBUG = true;
 
+    public static final String KEYGUARD_PACKAGE = "com.android.systemui";
+    public static final String KEYGUARD_CLASS = "com.android.systemui.keyguard.KeyguardService";
+
     protected KeyguardServiceWrapper mKeyguardService;
     private final Context mContext;
     private final View mScrim; // shown if keyguard crashes
