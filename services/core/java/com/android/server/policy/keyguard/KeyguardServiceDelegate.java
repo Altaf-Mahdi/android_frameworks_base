@@ -42,6 +42,9 @@ public class KeyguardServiceDelegate {
     private static final int INTERACTIVE_STATE_AWAKE = 1;
     private static final int INTERACTIVE_STATE_GOING_TO_SLEEP = 2;
 
+    public static final String KEYGUARD_PACKAGE = "com.android.systemui";
+    public static final String KEYGUARD_CLASS = "com.android.systemui.keyguard.KeyguardService";
+
     protected KeyguardServiceWrapper mKeyguardService;
     private final Context mContext;
     private final View mScrim; // shown if keyguard crashes
