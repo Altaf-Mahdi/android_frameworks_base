@@ -44,6 +44,7 @@ import com.android.systemui.qs.tiles.ColorInversionTile;
 import com.android.systemui.qs.tiles.CompassTile;
 import com.android.systemui.qs.tiles.DndTile;
 import com.android.systemui.qs.tiles.FlashlightTile;
+import com.android.systemui.qs.tiles.HeadsUpTile;
 import com.android.systemui.qs.tiles.HotspotTile;
 import com.android.systemui.qs.tiles.IntentTile;
 import com.android.systemui.qs.tiles.LocationTile;
@@ -310,6 +311,8 @@ public class QSTileHost implements QSTile.Host {
                 return new AmbientDisplayTile(this);
             case QSConstants.TILE_USB_TETHER:
                 return new UsbTetherTile(this);
+            case QSConstants.TILE_HEADS_UP:
+                return new HeadsUpTile(this);
             default:
                 throw new IllegalArgumentException("Bad tile spec: " + tileSpec);
         }
