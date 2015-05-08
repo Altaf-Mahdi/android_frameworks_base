@@ -4117,6 +4117,27 @@ public final class Settings {
         public static final String STATUS_BAR_CUSTOM_HEADER_PROVIDER = "status_bar_custom_header_provider";
 
         /**
+
+       /**
+        * PA Pie control panel. Meet him on the spot.
+        * 0 = off
+        * 1 = on
+        * Changes aspect depends on status bar visibility.
+        * @hide
+        */
+        public static final String PIE_STATE = "pie_state";
+
+        /**
+         * Locations of the Pa Pie in the screen.
+         * (1<<0) = BOTTOM
+         * (1<<1) = LEFT
+         * (1<<2) = RIGHT
+         * Default: BOTTOM
+         * @hide
+         */
+        public static final String PIE_GRAVITY = "pie_gravity";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
