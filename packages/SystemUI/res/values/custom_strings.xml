@@ -37,6 +37,7 @@
     <string name="quick_settings_brightness">Brightness</string>
     <string name="quick_settings_expanded_desktop">Expanded</string>
     <string name="quick_settings_expanded_desktop_off">Normal</string>
+    <string name="quick_settings_pa_pie">Pie</string>
     <string name="quick_settings_screen_off">Screen off</string>
     <string name="quick_settings_screenshot">Screenshot</string>
     <string name="quick_settings_sync">Sync</string>

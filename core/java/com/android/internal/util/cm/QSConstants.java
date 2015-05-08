@@ -52,6 +52,7 @@ public class QSConstants {
     public static final String TILE_LIVE_DISPLAY = "live_display";
     public static final String TILE_USB_TETHER = "usb_tether";
     public static final String TILE_HEADS_UP = "heads_up";
+    public static final String TILE_PA_PIE = "pa_pie";
 
     public static final String DYNAMIC_TILE_NEXT_ALARM = "next_alarm";
     public static final String DYNAMIC_TILE_IME_SELECTOR = "ime_selector";
@@ -94,6 +95,7 @@ public class QSConstants {
         STATIC_TILES_AVAILABLE.add(TILE_LIVE_DISPLAY);
         STATIC_TILES_AVAILABLE.add(TILE_USB_TETHER);
         STATIC_TILES_AVAILABLE.add(TILE_HEADS_UP);
+        STATIC_TILES_AVAILABLE.add(TILE_PA_PIE);
 
         DYNAMIC_TILES_AVAILABLE.add(DYNAMIC_TILE_NEXT_ALARM);
         DYNAMIC_TILES_AVAILABLE.add(DYNAMIC_TILE_IME_SELECTOR);
