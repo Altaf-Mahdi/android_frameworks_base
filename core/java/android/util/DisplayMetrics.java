@@ -240,10 +240,8 @@ public class DisplayMetrics {
      */
     public float noncompatYdpi;
 
-    /**
-     * @hide
-     */
-    public void updateDensity() {
+    /** @hide */
+    public void forcePersistedDensity() {
         density = DENSITY_CURRENT / (float) DENSITY_DEFAULT;
         densityDpi = DENSITY_CURRENT;
         scaledDensity = density;

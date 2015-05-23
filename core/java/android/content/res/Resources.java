@@ -264,7 +264,7 @@ public class Resources {
             CompatibilityInfo compatInfo) {
         mAssets = assets;
         mMetrics.setToDefaults();
-        mMetrics.updateDensity();
+        mMetrics.forcePersistedDensity();
         if (compatInfo != null) {
             mCompatibilityInfo = compatInfo;
         }
@@ -2008,8 +2008,14 @@ public class Resources {
             if (mConfiguration.densityDpi != Configuration.DENSITY_DPI_UNDEFINED) {
                 mMetrics.densityDpi = mConfiguration.densityDpi;
                 mMetrics.density = mConfiguration.densityDpi * DisplayMetrics.DENSITY_DEFAULT_SCALE;
-                if (mCompatibilityInfo.equals(CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO)) {
-                    mMetrics.updateDensity();
+
+                final boolean densityScalingSupported = !mCompatibilityInfo.isScalingRequired()
+                        || mCompatibilityInfo.alwaysSupportsScreen();
+                final boolean appScalingRequired = mCompatibilityInfo.neverSupportsScreen()
+                        && mCompatibilityInfo.isScalingRequired();
+                if (densityScalingSupported || appScalingRequired ||
+                        mCompatibilityInfo.equals(CompatibilityInfo.DEFAULT_COMPATIBILITY_INFO)) {
+                    mMetrics.forcePersistedDensity();
                 }
             }
             mMetrics.scaledDensity = mMetrics.density * mConfiguration.fontScale;
