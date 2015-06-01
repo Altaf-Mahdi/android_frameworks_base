@@ -30,6 +30,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.PowerManager;
+import android.provider.Settings;
 import android.util.AttributeSet;
 import android.util.MathUtils;
 import android.view.GestureDetector;
@@ -101,6 +102,8 @@ public class NotificationPanelView extends PanelView implements
             "cmsystem:" + CMSettings.System.DOUBLE_TAP_SLEEP_GESTURE;
     private static final String LOCK_SCREEN_WEATHER_ENABLED =
             "cmsecure:" + CMSettings.Secure.LOCK_SCREEN_WEATHER_ENABLED;
+    private static final String DOUBLE_TAP_SLEEP_LOCK_SCREEN =
+            "system:" + Settings.System.DOUBLE_TAP_SLEEP_LOCK_SCREEN;
 
     private static final Rect mDummyDirtyRect = new Rect(0, 0, 1, 1);
 
@@ -224,6 +227,7 @@ public class NotificationPanelView extends PanelView implements
 
     private int mOneFingerQuickSettingsIntercept;
     private boolean mDoubleTapToSleepEnabled;
+    private boolean mDoubleTapToSleepLockScreen;
     private int mStatusBarHeaderHeight;
     private GestureDetector mDoubleTapGesture;
 
@@ -389,7 +393,8 @@ public class NotificationPanelView extends PanelView implements
         TunerService.get(mContext).addTunable(this,
                 STATUS_BAR_QUICK_QS_PULLDOWN,
                 DOUBLE_TAP_SLEEP_GESTURE,
-                LOCK_SCREEN_WEATHER_ENABLED);
+                LOCK_SCREEN_WEATHER_ENABLED,
+                DOUBLE_TAP_SLEEP_LOCK_SCREEN);
     }
 
     @Override
@@ -794,6 +799,10 @@ public class NotificationPanelView extends PanelView implements
         if (mDoubleTapToSleepEnabled
                 && mStatusBarState == StatusBarState.KEYGUARD
                 && event.getY() < mStatusBarHeaderHeight) {
+            mDoubleTapGesture.onTouchEvent(event);
+        }
+        if (mDoubleTapToSleepLockScreen
+                && mStatusBarState == StatusBarState.KEYGUARD) {
             mDoubleTapGesture.onTouchEvent(event);
         }
         initDownStates(event);
@@ -2452,6 +2461,9 @@ public class NotificationPanelView extends PanelView implements
                         && wasKeyguardWeatherEnabled != mKeyguardWeatherEnabled) {
                     onWeatherChanged(mWeatherController.getWeatherInfo());
                 }
+                break;
+            case DOUBLE_TAP_SLEEP_LOCK_SCREEN:
+                mDoubleTapToSleepLockScreen = newValue == null || Integer.parseInt(newValue) == 1;
                 break;
             default:
                 break;
