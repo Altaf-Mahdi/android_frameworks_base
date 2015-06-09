@@ -92,12 +92,16 @@ public class HotspotTile extends QSTile<QSTile.BooleanState> {
         state.visible = mController.isHotspotSupported();
         state.label = mContext.getString(R.string.quick_settings_hotspot_label);
 
-        if (arg instanceof Boolean) {
-            state.value = (boolean) arg;
+        state.value = mController.isHotspotEnabled();
+        if (state.visible && state.value) {
+            state.icon = mEnable;
+            state.contentDescription = mContext.getString(
+                    R.string.accessibility_quick_settings_hotspot_on);
         } else {
-            state.value = mController.isHotspotEnabled();
+            state.icon = mDisable;
+            state.contentDescription = mContext.getString(
+                    R.string.accessibility_quick_settings_hotspot_off);
         }
-        state.icon = state.visible && state.value ? mEnable : mDisable;
     }
 
     @Override

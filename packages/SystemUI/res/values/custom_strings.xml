@@ -17,45 +17,10 @@
  */
 -->
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <!-- Content description of the location tile in quick settings when on, battery saving mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_location_battery_saving">Location reporting: battery saving mode.</string>
-    <!-- Content description of the location tile in quick settings when on, sensors only mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_location_gps_only">Location reporting: sensors only mode.</string>
-    <!-- Content description of the location tile in quick settings when on, high accuracy mode (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_location_high_accuracy">Location reporting: high accuracy mode.</string>
-
-    <!-- QuickSettings: Location detail panel title [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_location_detail_title">Location mode</string>
-    <!-- QuickSettings: Location (On, low-power) [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_location_battery_saving_label">Battery saving</string>
-    <!-- QuickSettings: Location (On, gps-only) [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_location_gps_only_label">Device only</string>
-    <!-- QuickSettings: Location (On, high-accuracy) [CHAR LIMIT=NONE] -->
-    <string name="quick_settings_location_high_accuracy_label">High accuracy</string>
-
-    <!-- Content description of the heads up tile in quick settings when off (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_heads_up_off">Heads up off.</string>
-    <!-- Content description of the heads up tile in quick settings when on (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_heads_up_on">Heads up on.</string>
-
-    <!-- Announcement made when heads up changes to off (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_heads_up_changed_off">Heads up turned off.</string>
-    <!-- Announcement made when heads up changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
-    <string name="accessibility_quick_settings_heads_up_changed_on">Heads up turned on.</string>
-
-    <string name="quick_settings_nfc_label">NFC</string>
-    <string name="quick_settings_compass_label">Compass</string>
-    <string name="quick_settings_compass_value" translatable="false"><xliff:g id="degrees">%1$.0f</xliff:g>\u00b0 <xliff:g id="direction">%2$s</xliff:g></string>
-    <string name="quick_settings_compass_init">Initializing\u2026</string>
-    <string name="quick_settings_screen_timeout_detail_title">Screen timeout</string>
-    <string name="quick_settings_lte_tile_title">LTE</string>
+    <!-- Quick settings -->
     <string name="quick_settings_screenshot">Screenshot</string>
     <string name="quick_settings_brightness">Brightness</string>
     <string name="quick_settings_battery_saver">Battery saver</string>
     <string name="quick_settings_battery_saver_off">Battery saver off</string>
     <string name="quick_settings_screen_off">Screen off</string>
-    <string name="quick_settings_doze">Doze enabled</string>
-    <string name="quick_settings_doze_off">Doze disabled</string>
-    <string name="quick_settings_usb_tether_label">USB tethering</string>
-    <string name="quick_settings_heads_up_label">Heads up</string>
 </resources>
