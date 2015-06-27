@@ -3842,6 +3842,13 @@ public final class Settings {
          */
         public static final String HEADS_UP_NOTIFICATION_SNOOZE = "heads_up_notification_snooze";
 
+        /**
+         * Launch headsup in floating window or not
+         *
+         * @hide
+         */
+        public static final String HEADS_UP_FLOATING = "heads_up_floating";
+
         /**  
          * AOKP Custom System Animations
          * @hide
