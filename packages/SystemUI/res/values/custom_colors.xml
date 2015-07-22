@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
+/*
  * Copyright 2014-2015 Euphoria-OS project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,12 +14,9 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
-*/
+ */
 -->
 <resources>
-    <dimen name="detail_radio_group_padding_left">16dp</dimen>
-    <dimen name="detail_radio_group_padding">8dp</dimen>
-
-    <!-- The font size for the temperature text -->
-    <dimen name="status_bar_temp_text_size">14sp</dimen>
+    <!-- Status bar temperature color -->
+    <color name="status_bar_temp_text_color">#FFFFFFFF</color>
 </resources>
