@@ -238,7 +238,9 @@ public class PhoneStatusBarPolicy {
 
     private final void updateHeadset(Intent intent) {
         int state = intent.getIntExtra("state", 0);
-        mService.setIconVisibility(SLOT_HEADSET, state == 1 ? true : false);
+        boolean mHeadsetIcon = Settings.System.getInt(mContext.getContentResolver(),
+                Settings.System.SHOW_HEADSET_ICON, 0) == 1;
+        mService.setIconVisibility(SLOT_HEADSET, (state == 1 && mHeadsetIcon)  ? true : false);
     }
 
     public void setZenMode(int zen) {
