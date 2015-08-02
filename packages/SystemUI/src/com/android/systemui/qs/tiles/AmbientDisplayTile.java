@@ -19,21 +19,29 @@ package com.android.systemui.qs.tiles;
 
 import android.content.Context;
 import android.content.Intent;
-import android.database.ContentObserver;
-import android.net.Uri;
-import android.os.UserHandle;
 import android.provider.Settings;
+import android.provider.Settings.Secure;
 
 import com.android.internal.logging.MetricsLogger;
 
-import com.android.systemui.R;
+import com.android.systemui.qs.SecureSetting;
 import com.android.systemui.qs.QSTile;
+import com.android.systemui.R;
 
 /** Quick settings tile: Ambient display **/
 public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
 
+    private final SecureSetting mSetting;
+
     public AmbientDisplayTile(Host host) {
         super(host);
+
+        mSetting = new SecureSetting(mContext, mHandler, Secure.DOZE_ENABLED) {
+            @Override
+            protected void handleValueChanged(int value, boolean observedChange) {
+                handleRefreshState(value);
+            }
+        };
     }
 
     @Override
@@ -48,7 +56,7 @@ public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleClick() {
-        toggleState();
+        setEnabled(!mState.value);
         refreshState();
         qsCollapsePanel();
     }
@@ -69,64 +77,41 @@ public class AmbientDisplayTile extends QSTile<QSTile.BooleanState> {
         mHost.startActivityDismissingKeyguard(intent);
     }
 
+    private void setEnabled(boolean enabled) {
+        Settings.Secure.putInt(mContext.getContentResolver(),
+                Settings.Secure.DOZE_ENABLED,
+                enabled ? 1 : 0);
+    }
+
     @Override
     protected void handleUpdateState(BooleanState state, Object arg) {
+        final int value = arg instanceof Integer ? (Integer)arg : mSetting.getValue();
+        final boolean enable = value != 0;
+        state.value = enable;
         state.visible = true;
-        state.value = isAmbientDisplayEnabled();
         state.label = mContext.getString(R.string.quick_settings_ambient_display_label);
-        if (state.value) {
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_doze);
+        if (enable) {
+            state.icon = ResourceIcon.get(R.drawable.ic_qs_ambientdisplay_on);
             state.contentDescription =  mContext.getString(
                     R.string.accessibility_quick_settings_ambient_display_on);
         } else {
-            state.icon = ResourceIcon.get(R.drawable.ic_qs_doze_off);
+            state.icon = ResourceIcon.get(R.drawable.ic_qs_ambientdisplay_off);
             state.contentDescription =  mContext.getString(
                     R.string.accessibility_quick_settings_ambient_display_off);
         }
     }
 
-    protected void toggleState() {
-        Settings.Secure.putInt(mContext.getContentResolver(),
-            Settings.Secure.DOZE_ENABLED, isAmbientDisplayEnabled() ? 0 : 1);
-    }
-
-    private boolean isAmbientDisplayEnabled() {
-        return Settings.Secure.getInt(mContext.getContentResolver(),
-                Settings.Secure.DOZE_ENABLED, 1) == 1;
-    }
-
-    private ContentObserver mObserver = new ContentObserver(mHandler) {
-        @Override
-        public void onChange(boolean selfChange, Uri uri) {
-            refreshState();
-        }
-    };
-
     @Override
     protected String composeChangeAnnouncement() {
         if (mState.value) {
-            return mContext.getString(
-                    R.string.accessibility_quick_settings_ambient_display_changed_on);
+            return mContext.getString(R.string.accessibility_quick_settings_ambient_display_changed_on);
         } else {
-            return mContext.getString(
-                    R.string.accessibility_quick_settings_ambient_display_changed_off);
+            return mContext.getString(R.string.accessibility_quick_settings_ambient_display_changed_off);
         }
-    }
-
-    @Override
-    public void destroy() {
-        mContext.getContentResolver().unregisterContentObserver(mObserver);
     }
 
     @Override
     public void setListening(boolean listening) {
-        if (listening) {
-            mContext.getContentResolver().registerContentObserver(
-                    Settings.Secure.getUriFor(Settings.Secure.DOZE_ENABLED),
-                    false, mObserver);
-        } else {
-            mContext.getContentResolver().unregisterContentObserver(mObserver);
-        }
+        // Do nothing
     }
-
 }
