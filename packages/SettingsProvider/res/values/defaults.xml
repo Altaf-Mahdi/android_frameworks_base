@@ -281,4 +281,6 @@
     <!-- Default for Settings.System.SYSTEM_PROFILES_ENABLED -->
     <bool name="def_system_profiles_enabled">true</bool>
 
+    <!-- Defaults for Settings.System.Secure.ADVANCED_MODE. -->
+    <bool name="def_advanced_mode">false</bool>
 </resources>

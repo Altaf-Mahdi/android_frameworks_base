@@ -2557,6 +2557,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             loadBooleanSetting(stmt, Settings.System.SYSTEM_PROFILES_ENABLED,
                     R.bool.def_system_profiles_enabled);
 
+            loadBooleanSetting(stmt, Settings.Secure.ADVANCED_MODE,
+                    R.bool.def_advanced_mode);
+
         } finally {
             if (stmt != null) stmt.close();
         }
