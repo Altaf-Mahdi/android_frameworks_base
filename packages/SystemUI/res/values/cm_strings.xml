@@ -105,6 +105,9 @@
     <!-- Announcement made when USB tethering changes to on (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_usb_tether_changed_on">USB tethering turned on.</string>
 
+    <!-- Content description of the volume panel tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
+    <string name="accessibility_quick_settings_volume_panel">Volume panel.</string>
+
     <!-- QuickSettings: Location detail panel title [CHAR LIMIT=NONE] -->
     <string name="quick_settings_location_detail_title">Location mode</string>
     <!-- QuickSettings: Location (On, low-power) [CHAR LIMIT=NONE] -->
@@ -123,4 +126,5 @@
     <string name="quick_settings_usb_tether_label">USB tethering</string>
     <string name="quick_settings_heads_up_label">Heads up</string>
     <string name="quick_settings_ambient_display_label">Ambient display</string>
+    <string name="quick_settings_volume_panel_label">Volume panel</string>
 </resources>

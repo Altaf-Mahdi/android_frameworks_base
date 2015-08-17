@@ -276,6 +276,7 @@ public interface MetricsConstants {
     public static final int QS_AMBIENT_DISPLAY = 247;
     public static final int QS_USB_TETHER = 248;
     public static final int QS_HEADS_UP = 249;
+    public static final int QS_VOLUME = 250;
 
     // These constants must match those in the analytic pipeline, do not edit.
     // Add temporary values to the top of MetricsLogger instead.
