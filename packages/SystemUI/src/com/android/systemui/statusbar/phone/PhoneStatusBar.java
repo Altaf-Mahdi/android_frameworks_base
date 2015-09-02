@@ -598,10 +598,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 }
             }
 
+            boolean navLeftInLandscape = Settings.System.getIntForUser(resolver,
+                    Settings.System.NAVBAR_LEFT_IN_LANDSCAPE, 0, UserHandle.USER_CURRENT) == 1;
             if (mNavigationBarView != null) {
-                boolean navLeftInLandscape = Settings.System.getIntForUser(resolver,
-                        Settings.System.NAVBAR_LEFT_IN_LANDSCAPE, 0, UserHandle.USER_CURRENT) == 1;
                 mNavigationBarView.setLeftInLandscape(navLeftInLandscape);
+            }
+            if (mSearchPanelView != null) {
+                mSearchPanelView.setLeftNavbar(navLeftInLandscape);
             }
 
             mBatterySaverBarColor = Settings.System.getIntForUser(resolver,
