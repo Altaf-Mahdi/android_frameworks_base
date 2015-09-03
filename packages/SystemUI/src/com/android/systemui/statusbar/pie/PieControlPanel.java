@@ -23,6 +23,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.hardware.input.InputManager;
 import android.os.Handler;
+import android.os.PowerManager;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.util.AttributeSet;
@@ -49,6 +50,7 @@ public class PieControlPanel extends FrameLayout {
     public static final String BACK_BUTTON = "##back##";
     public static final String HOME_BUTTON = "##home##";
     public static final String RECENT_BUTTON = "##recent##";
+    public static final String POWER_BUTTON = "##power##";
 
     private boolean mShowing;
     private boolean mMenuButton;
@@ -66,6 +68,7 @@ public class PieControlPanel extends FrameLayout {
     private ViewGroup mPieContentFrame;
     private PieController mPieController;
     private boolean mRelocatePieOnRotation;
+    private PowerManager mPm;
 
     /* Analogous to NAVBAR_ALWAYS_AT_RIGHT */
     final static boolean PIE_ALWAYS_AT_RIGHT = true;
@@ -84,6 +87,7 @@ public class PieControlPanel extends FrameLayout {
         mMenuButton = false;
         mRelocatePieOnRotation = mContext.getResources().getBoolean(
                 R.bool.config_relocatePieOnRotation);
+        mPm = (PowerManager) mContext.getSystemService(Context.POWER_SERVICE);
     }
 
     public boolean currentAppUsesMenu() {
@@ -301,6 +305,9 @@ public class PieControlPanel extends FrameLayout {
                 break;
             case RECENT_BUTTON:
                 mStatusBar.toggleRecentApps();
+                break;
+            case POWER_BUTTON:
+                mPm.goToSleep(SystemClock.uptimeMillis());
                 break;
             default:
                 //???
