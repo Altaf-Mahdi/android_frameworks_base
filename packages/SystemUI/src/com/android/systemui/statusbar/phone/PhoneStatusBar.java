@@ -148,7 +148,6 @@ import com.android.systemui.EventLogTags;
 import com.android.systemui.FontSizeUtils;
 import com.android.systemui.R;
 import com.android.systemui.cm.UserContentObserver;
-import com.android.systemui.custom.SearchPanelSwipeView;
 import com.android.systemui.doze.DozeHost;
 import com.android.systemui.doze.DozeLog;
 import com.android.systemui.keyguard.KeyguardViewMediator;
@@ -434,8 +433,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     // Battery saver bar color
     private boolean mBatterySaverBarColor;
 
-    private boolean mNavBarEnabled;
-
     // for disabling the status bar
     int mDisabled = 0;
 
@@ -501,8 +498,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                     Settings.System.STATUS_BAR_TICKER_ENABLED), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.Secure.getUriFor(
                     Settings.Secure.RECENTS_LONG_PRESS_ACTIVITY), false, this, UserHandle.USER_ALL);
-            resolver.registerContentObserver(Settings.System.getUriFor(
-                    Settings.System.NAVIGATION_BAR_SHOW), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.ENABLE_TASK_MANAGER), false, this, UserHandle.USER_ALL);
             resolver.registerContentObserver(Settings.System.getUriFor(
@@ -607,9 +602,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                 boolean navLeftInLandscape = Settings.System.getIntForUser(resolver,
                         Settings.System.NAVBAR_LEFT_IN_LANDSCAPE, 0, UserHandle.USER_CURRENT) == 1;
                 mNavigationBarView.setLeftInLandscape(navLeftInLandscape);
-
-                mNavBarEnabled = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.NAVIGATION_BAR_SHOW, 1, UserHandle.USER_CURRENT) == 1;
             }
 
             mBatterySaverBarColor = Settings.System.getIntForUser(resolver,
@@ -772,8 +764,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
     private ViewMediatorCallback mKeyguardViewMediatorCallback;
     private ScrimController mScrimController;
     private DozeScrimController mDozeScrimController;
-
-    private SearchPanelSwipeView mSearchPanelSwipeView;
 
     private final Runnable mAutohide = new Runnable() {
         @Override
@@ -1093,13 +1083,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                         checkUserAutohide(v, event);
                         return false;
                     }});
-            }
-
-            if (!mNavBarEnabled) {
-                mSearchPanelSwipeView = new SearchPanelSwipeView(mContext, this);
-                mWindowManager.addView(mSearchPanelSwipeView,
-                mSearchPanelSwipeView.getGesturePanelLayoutParams());
-                updateSearchPanel();
             }
         } catch (RemoteException ex) {
             // no window manager? good luck with that
@@ -1589,9 +1572,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         if (mNavigationBarView != null) {
             mNavigationBarView.setDelegateView(mSearchPanelView);
         }
-        if (mSearchPanelSwipeView != null) {
-            mSearchPanelSwipeView.setDelegateView(mSearchPanelView);
-        }
     }
 
     @Override
@@ -1751,13 +1731,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         prepareNavigationBarView();
 
         mWindowManager.updateViewLayout(mNavigationBarView, getNavigationBarLayoutParams());
-    }
-
-    private void repositionSearchPanelSwipeView() {
-        if (mSearchPanelSwipeView == null || !mSearchPanelSwipeView.isAttachedToWindow()) return;
-        mSearchPanelSwipeView.updateLayout();
-        mWindowManager.updateViewLayout(mSearchPanelSwipeView, mSearchPanelSwipeView.getGesturePanelLayoutParams());
-        updateSearchPanel();
     }
 
     private void notifyNavigationBarScreenOn(boolean screenOn) {
@@ -3951,7 +3924,6 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
             else if (Intent.ACTION_SCREEN_ON.equals(action)) {
                 mScreenOn = true;
-                repositionSearchPanelSwipeView();
                 notifyNavigationBarScreenOn(true);
             }
             else if (ACTION_DEMO.equals(action)) {
