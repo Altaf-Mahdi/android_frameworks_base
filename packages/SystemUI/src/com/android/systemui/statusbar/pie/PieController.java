@@ -71,6 +71,7 @@ public class PieController extends EdgeGestureManager.EdgeGestureActivationListe
     private PieItem mBack;
     private PieItem mHome;
     private PieItem mRecent;
+    private PieItem mPower;
 
     protected PieMenu mPie;
     protected int mItemSize;
@@ -236,7 +237,9 @@ public class PieController extends EdgeGestureManager.EdgeGestureActivationListe
         mBack = makeItem(R.drawable.ic_sysbar_back, 1, PieControlPanel.BACK_BUTTON, false);
         mHome = makeItem(R.drawable.ic_sysbar_home, 1, PieControlPanel.HOME_BUTTON, false);
         mRecent = makeItem(R.drawable.ic_sysbar_recent, 1, PieControlPanel.RECENT_BUTTON, false);
+        mPower = makeItem(R.drawable.ic_sysbar_power, 1, PieControlPanel.POWER_BUTTON, true);
 
+        mPie.addItem(mPower);
         mPie.addItem(mRecent);
         mPie.addItem(mHome);
         mPie.addItem(mBack);
