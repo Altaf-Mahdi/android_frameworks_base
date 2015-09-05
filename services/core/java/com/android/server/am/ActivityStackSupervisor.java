@@ -1351,7 +1351,7 @@ public final class ActivityStackSupervisor implements DisplayListener {
                                     container.mActivityDisplay.mDisplayId)));
             Trace.traceBegin(Trace.TRACE_TAG_ACTIVITY_MANAGER , "startActivityLocked");
             /* Acquire perf lock during new app launch */
-            mPm.launchBoost();
+            mPm.cpuBoost(2000 * 1000);
             Trace.traceEnd(Trace.TRACE_TAG_ACTIVITY_MANAGER);
         }
 
@@ -2736,7 +2736,7 @@ public final class ActivityStackSupervisor implements DisplayListener {
                 }
             }
         }
-        mPm.launchBoost();
+        mPm.cpuBoost(2000 * 1000);
 
         /* Delay Binder Explicit GC during application launch */
         BinderInternal.modifyDelayedGcParams();
