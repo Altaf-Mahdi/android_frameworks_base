@@ -1371,7 +1371,7 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mQSPanel.setHost(mQSTileHost);
             mQSPanel.setTiles(mQSTileHost.getTiles());
             mBrightnessMirrorController =
-                    new BrightnessMirrorController(mStatusBarWindowContent);
+                    new BrightnessMirrorController(mContext, mStatusBarWindowContent);
             mQSPanel.setBrightnessMirror(mBrightnessMirrorController);
             mHeader.setQSPanel(mQSPanel);
             mQSTileHost.setCallback(new QSTileHost.Callback() {
