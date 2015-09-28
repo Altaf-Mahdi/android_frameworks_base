@@ -27,7 +27,6 @@ import android.content.res.TypedArray;
 import android.hardware.input.InputManager;
 import android.media.AudioManager;
 import android.os.Bundle;
-import android.os.Handler;
 import android.os.PowerManager;
 import android.os.SystemClock;
 import android.util.AttributeSet;
@@ -40,14 +39,12 @@ import android.view.MotionEvent;
 import android.view.SoundEffectConstants;
 import android.view.View;
 import android.view.ViewConfiguration;
-import android.view.ViewParent;
 import android.view.accessibility.AccessibilityEvent;
 import android.view.accessibility.AccessibilityNodeInfo;
 import android.widget.ImageView;
 
 import com.android.systemui.R;
 import com.android.systemui.statusbar.phone.NavbarEditor;
-import com.android.systemui.statusbar.phone.NavigationBarView;
 
 import static android.view.accessibility.AccessibilityNodeInfo.ACTION_CLICK;
 import static android.view.accessibility.AccessibilityNodeInfo.ACTION_LONG_CLICK;
@@ -76,8 +73,6 @@ public class KeyButtonView extends ImageView {
     private boolean mPerformedLongClick;
 
     private PowerManager mPm;
-
-    private final Handler mHandler = new Handler();
 
     private final Runnable mCheckLongPress = new Runnable() {
         public void run() {
@@ -333,23 +328,8 @@ public class KeyButtonView extends ImageView {
                 break;
         }
 
-        mHandler.post(mNavButtonDimActivator);
-
         return true;
     }
-
-    private final Runnable mNavButtonDimActivator = new Runnable() {
-        @Override
-        public void run() {
-            ViewParent parent = getParent();
-            while (parent != null && !(parent instanceof NavigationBarView)) {
-                parent = parent.getParent();
-            }
-            if (parent != null) {
-                ((NavigationBarView) parent).onNavButtonTouched();
-            }
-        }
-    };
 
     public void playSoundEffect(int soundConstant) {
         mAudioManager.playSoundEffect(soundConstant, ActivityManager.getCurrentUser());
