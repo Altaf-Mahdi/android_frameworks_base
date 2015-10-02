@@ -67,7 +67,6 @@
         android:layout_width="48dp"
         android:layout_height="@dimen/status_bar_header_height"
         android:background="@drawable/ripple_drawable"
-        android:layout_marginStart="8dp"
         android:visibility="gone"/>
 
     <ImageButton android:id="@+id/task_manager_button"
@@ -76,7 +75,6 @@
         android:layout_width="48dp"
         android:layout_height="@dimen/status_bar_header_height"
         android:background="@drawable/ripple_drawable"
-        android:layout_marginStart="8dp"
         android:src="@drawable/ic_tasklist_switch_normal"
         android:visibility="gone"/>
 
@@ -103,8 +101,24 @@
             android:paddingEnd="@dimen/battery_level_padding_end"
             android:textColor="@color/status_bar_battery_level_text_color"
             android:textSize="@dimen/battery_level_text_size"
+            android:singleLine="true"
             android:importantForAccessibility="noHideDescendants"/>
     </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/networkTraffic_container"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/status_bar_header_height"
+        android:layout_toStartOf="@id/system_icons_super_container"
+        android:background="@drawable/ripple_drawable"
+        android:visibility="gone" >
+        <com.android.systemui.statusbar.policy.NetworkTraffic
+            android:id="@+id/networkTraffic"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:singleLine="false"
+            android:gravity="center_vertical" />
+    </FrameLayout>
 
     <TextView
         android:id="@+id/header_emergency_calls_only"

@@ -403,6 +403,11 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
 
     private boolean mShowCarrierInPanel = false;
 
+    // Network traffic
+    private int mShowNetworkTraffic;
+    private LinearLayout mNetworkTraffic;
+    private View mNetworkTrafficHeader;
+
     // position
     int[] mPositionTmp = new int[2];
     boolean mExpandedVisible;
@@ -537,6 +542,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.STATUS_BAR_NETWORK_ACTIVITY),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.SHOW_STATUS_BAR_NETWORK_TRAFFIC),
+                    false, this, UserHandle.USER_ALL);
             update();
         }
 
@@ -569,6 +577,13 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
                             Settings.System.STATUS_BAR_WEATHER_TEMP_STYLE, 0,
                             UserHandle.USER_CURRENT);
                     updateTempView();
+            } else if (uri.equals(Settings.System.getUriFor(
+                    Settings.System.SHOW_STATUS_BAR_NETWORK_TRAFFIC))) {
+                    mShowNetworkTraffic = Settings.System.getIntForUser(
+                            mContext.getContentResolver(),
+                            Settings.System.SHOW_STATUS_BAR_NETWORK_TRAFFIC, 0,
+                            UserHandle.USER_CURRENT);
+                    updateNetworkTrafficView();
             }
             update();
         }
@@ -756,6 +771,30 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             }
             updateWeatherTextState(mWeatherController.getWeatherInfo().temp);
         }
+    }
+
+    private void updateNetworkTrafficView() {
+        mNetworkTraffic = (LinearLayout)
+                mStatusBarView.findViewById(R.id.networkTraffic_container);
+        mNetworkTrafficHeader = mHeader.findViewById(R.id.networkTraffic_container);
+        mShowNetworkTraffic = Settings.System.getIntForUser(
+                mContext.getContentResolver(), Settings
+           .System.SHOW_STATUS_BAR_NETWORK_TRAFFIC, 0, UserHandle.USER_CURRENT);
+        switch (mShowNetworkTraffic) {
+            default:
+            case 0:
+                mNetworkTraffic.setVisibility(View.VISIBLE);
+                mNetworkTrafficHeader.setVisibility(View.GONE);
+                break;
+            case 1:
+                mNetworkTraffic.setVisibility(View.GONE);
+                mNetworkTrafficHeader.setVisibility(View.VISIBLE);
+                break;
+            case 2:
+                mNetworkTraffic.setVisibility(View.VISIBLE);
+                mNetworkTrafficHeader.setVisibility(View.VISIBLE);
+                break;
+         }
     }
 
     // ensure quick settings is disabled until the current user makes it through the setup wizard
@@ -1338,6 +1377,8 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mWeatherTempView = (TextView) mStatusBarView.findViewById(R.id.left_weather_temp);
         }
         updateTempView();
+
+        updateNetworkTrafficView();
 
         mKeyguardBottomArea.setPhoneStatusBar(this);
         if (mAccessibilityController == null) {

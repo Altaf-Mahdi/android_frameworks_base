@@ -120,13 +120,18 @@
             android:orientation="horizontal"
             >
 
-            <com.android.systemui.statusbar.policy.NetworkTraffic
-                android:id="@+id/networkTraffic"
+            <LinearLayout android:id="@+id/networkTraffic_container"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:singleLine="false"
                 android:gravity="right|center_vertical"
-                android:paddingEnd="2dp" />
+                android:paddingEnd="2dp" >
+                <com.android.systemui.statusbar.policy.NetworkTraffic
+                    android:id="@+id/networkTraffic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:singleLine="false"
+                    android:gravity="center_vertical" />
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/weather_temp"
