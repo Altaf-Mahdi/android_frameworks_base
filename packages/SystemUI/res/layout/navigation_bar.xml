@@ -48,14 +48,13 @@
                 android:layout_weight="0"
                 android:visibility="invisible"
                 />
-            <com.android.systemui.statusbar.policy.KeyButtonView android:id="@+id/back"
+            <com.android.systemui.statusbar.policy.KeyButtonView android:id="@+id/recent_apps"
                 android:layout_width="@dimen/navigation_key_width"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_sysbar_back"
-                systemui:keyCode="4"
+                android:src="@drawable/ic_sysbar_recent"
                 android:layout_weight="0"
                 android:scaleType="center"
-                android:contentDescription="@string/accessibility_back"
+                android:contentDescription="@string/accessibility_recent"
                 />
             <View
                 android:layout_width="0dp"
@@ -79,13 +78,14 @@
                 android:layout_weight="1"
                 android:visibility="invisible"
                 />
-            <com.android.systemui.statusbar.policy.KeyButtonView android:id="@+id/recent_apps"
+            <com.android.systemui.statusbar.policy.KeyButtonView android:id="@+id/back"
                 android:layout_width="@dimen/navigation_key_width"
                 android:layout_height="match_parent"
-                android:src="@drawable/ic_sysbar_recent"
+                android:src="@drawable/ic_sysbar_back"
+                systemui:keyCode="4"
                 android:layout_weight="0"
                 android:scaleType="center"
-                android:contentDescription="@string/accessibility_recent"
+                android:contentDescription="@string/accessibility_back"
                 />
             <FrameLayout
                 android:layout_width="@dimen/navigation_side_padding"
