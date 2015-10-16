@@ -288,6 +288,9 @@ public interface MetricsConstants {
     // Notification drawer settings
     public static final int NOTIFICATION_DRAWER_SETTINGS = 247;
 
+    // Button settings
+    public static final int BUTTON_SETTINGS = 248;
+
     // These constants must match those in the analytic pipeline, do not edit.
     // Add temporary values to the top of MetricsLogger instead.
 
