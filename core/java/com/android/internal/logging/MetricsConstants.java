@@ -279,17 +279,17 @@ public interface MetricsConstants {
     public static final int QS_VOLUME = 250;
 
     // Power menu
-    public static final int POWER_MENU_SETTINGS = 244;
+    public static final int POWER_MENU_SETTINGS = 251;
 
     // Notifcation and battery settings
-    public static final int NOTIFICATION_LIGHT_SETTINGS = 245;
-    public static final int BATTERY_LIGHT_SETTINGS = 246;
+    public static final int NOTIFICATION_LIGHT_SETTINGS = 252;
+    public static final int BATTERY_LIGHT_SETTINGS = 253;
 
     // Notification drawer settings
-    public static final int NOTIFICATION_DRAWER_SETTINGS = 247;
+    public static final int NOTIFICATION_DRAWER_SETTINGS = 254;
 
     // Button settings
-    public static final int BUTTON_SETTINGS = 248;
+    public static final int BUTTON_SETTINGS = 255;
 
     // These constants must match those in the analytic pipeline, do not edit.
     // Add temporary values to the top of MetricsLogger instead.
