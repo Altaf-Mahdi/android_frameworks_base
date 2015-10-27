@@ -22,6 +22,7 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.database.ContentObserver;
 import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.Settings;
 import android.view.View;
@@ -29,12 +30,11 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import com.android.internal.logging.MetricsLogger;
-
 import com.android.systemui.R;
 import com.android.systemui.qs.QSDetailItemsList;
 import com.android.systemui.qs.QSTile;
+
+import com.android.internal.logging.MetricsLogger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,7 +102,7 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
 
     @Override
     public DetailAdapter getDetailAdapter() {
-        return new LocationDetailAdapter();
+        return new ScreenTimeoutDetailAdapter();
     }
 
     private ContentObserver mObserver = new ContentObserver(mHandler) {
@@ -277,7 +277,8 @@ public class ScreenTimeoutTile extends QSTile<ScreenTimeoutTile.TimeoutState> {
         }
 
     }
-    private class LocationDetailAdapter implements DetailAdapter, AdapterView.OnItemClickListener {
+    private class ScreenTimeoutDetailAdapter implements DetailAdapter,
+            AdapterView.OnItemClickListener {
         private QSDetailItemsList mItems;
 
         @Override

@@ -47,7 +47,7 @@ public class VolumeTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     protected void handleLongClick() {
-        mHost.startSettingsActivity(SOUND_SETTINGS);
+        mHost.startActivityDismissingKeyguard(SOUND_SETTINGS);
     }
 
     @Override
