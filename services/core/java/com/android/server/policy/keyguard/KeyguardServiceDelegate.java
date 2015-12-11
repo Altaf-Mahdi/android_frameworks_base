@@ -52,6 +52,10 @@ public class KeyguardServiceDelegate {
     private final KeyguardState mKeyguardState = new KeyguardState();
     private DrawnListener mDrawnListenerWhenConnect;
 
+    private static final String ACTION_STATE_CHANGE =
+            "com.android.internal.action.KEYGUARD_SERVICE_STATE_CHANGED";
+    private static final String EXTRA_ACTIVE = "active";
+
     private static final class KeyguardState {
         KeyguardState() {
             // Assume keyguard is showing and secure until we know for sure. This is here in
@@ -80,6 +84,13 @@ public class KeyguardServiceDelegate {
 
     public interface DrawnListener {
         void onDrawn();
+    }
+
+    private void sendStateChangeBroadcast(boolean bound) {
+        Intent i = new Intent(ACTION_STATE_CHANGE);
+        i.putExtra(EXTRA_ACTIVE, bound);
+        mScrim.getContext().sendBroadcastAsUser(i, UserHandle.ALL,
+                android.Manifest.permission.CONTROL_KEYGUARD);
     }
 
     // A delegate class to map a particular invocation with a ShowListener object.
@@ -174,6 +185,7 @@ public class KeyguardServiceDelegate {
             }
             if (mKeyguardState.bootCompleted) {
                 mKeyguardService.onBootCompleted();
+                sendStateChangeBroadcast(true);
             }
             if (mKeyguardState.occluded) {
                 mKeyguardService.setOccluded(mKeyguardState.occluded);
@@ -184,6 +196,7 @@ public class KeyguardServiceDelegate {
         public void onServiceDisconnected(ComponentName name) {
             if (DEBUG) Log.v(TAG, "*** Keyguard disconnected (boo!)");
             mKeyguardService = null;
+            sendStateChangeBroadcast(false);
         }
 
     };
@@ -391,6 +404,7 @@ public class KeyguardServiceDelegate {
             mKeyguardService.onBootCompleted();
         }
         mKeyguardState.bootCompleted = true;
+        sendStateChangeBroadcast(true);
     }
 
     public void onActivityDrawn() {
