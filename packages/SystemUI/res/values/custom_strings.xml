@@ -47,4 +47,8 @@
 
     <!-- Weather string format in expanded statusbar header -->
     <string name="weather_info_not_available">Weather informations not available</string>
+
+    <!-- Quick settings Settings -->
+    <string name="headsup_button_title">Headsup button</string>
+    <string name="quick_settings_title_brightness">Brighness slider</string>
 </resources>
