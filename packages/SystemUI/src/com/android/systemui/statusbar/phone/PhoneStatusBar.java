@@ -4158,6 +4158,10 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
             mDraggedDownRow = null;
         }
         mAssistManager.onLockscreenShown();
+        if (mNotificationPanel.hasExternalKeyguardView()) {
+            mNotificationPanel.getExternalKeyguardView().onKeyguardShowing(
+                    mStatusBarKeyguardViewManager.isScreenTurnedOn());
+        }
     }
 
     private void onLaunchTransitionFadingEnded() {
@@ -4308,6 +4312,9 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mNotificationPanel.onAffordanceLaunchEnded();
         mNotificationPanel.animate().cancel();
         mNotificationPanel.setAlpha(1f);
+        if ( mNotificationPanel.getExternalKeyguardView() != null) {
+            mNotificationPanel.getExternalKeyguardView().onKeyguardDismissed();
+        }
         return staying;
     }
 
@@ -4747,6 +4754,15 @@ public class PhoneStatusBar extends BaseStatusBar implements DemoMode,
         mScreenTurningOn = false;
         mDozeScrimController.onScreenTurnedOn();
         mVisualizerView.setVisible(true);
+        if (mNotificationPanel.hasExternalKeyguardView()) {
+            mNotificationPanel.getExternalKeyguardView().onScreenTurnedOn();
+        }
+    }
+
+    public void onScreenTurnedOff() {
+        if (mNotificationPanel.hasExternalKeyguardView()) {
+            mNotificationPanel.getExternalKeyguardView().onScreenTurnedOff();
+        }
     }
 
     /**
