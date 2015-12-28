@@ -3707,6 +3707,13 @@ public final class Settings {
         public static final String RECENT_PANEL_SHOW_TOPMOST = "recent_panel_show_topmost";
 
         /**
+         * Whether to mute annoying notifications
+         * @hide
+         */
+        public static final String MUTE_ANNOYING_NOTIFICATIONS_THRESHOLD =
+                "mute_annoying_notifications_threshold";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
