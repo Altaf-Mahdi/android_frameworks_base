@@ -20,4 +20,9 @@
     <string name="zen_mode_normal_toast">Do not disturb disabled</string>
     <string name="zen_mode_no_interruptions_toast">Do not disturb set to total silence</string>
     <string name="zen_mode_important_interruptions_toast">Do not disturb set to priority only</string>
+
+    <!-- [CHAR LIMIT=NONE] Title of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permlab_resetBatteryStats">reset battery statistics</string>
+    <!-- [CHAR LIMIT=NONE] Description of an application permission, listed so the user can choose whether they want to allow the application to do this. -->
+    <string name="permdesc_resetBatteryStats">Allows an application to reset the current low-level battery use data.</string>
 </resources>
