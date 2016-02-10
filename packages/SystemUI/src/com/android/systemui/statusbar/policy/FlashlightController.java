@@ -28,9 +28,10 @@ import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Process;
 import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
+import android.os.Process;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -84,6 +85,9 @@ public class FlashlightController {
                         setFlashlight(false);
                     }
                 });
+            } else if (Intent.ACTION_SCREEN_OFF.equals(intent.getAction())
+                    && disableOnScreenOff()) {
+                disableTorchOnScreenOff();
             } else if (Intent.ACTION_SCREEN_ON.equals(intent.getAction())) {
                 setNotificationShown(true);
             }
@@ -164,6 +168,7 @@ public class FlashlightController {
             IntentFilter filter = new IntentFilter();
             filter.addAction(ACTION_TURN_FLASHLIGHT_OFF);
             filter.addAction(Intent.ACTION_SCREEN_ON);
+            filter.addAction(Intent.ACTION_SCREEN_OFF);
             mContext.registerReceiver(mReceiver, filter);
             mReceiverRegistered = true;
         } else if (!listen) {
@@ -360,5 +365,44 @@ public class FlashlightController {
          * @param available true if the flashlight is currently available.
          */
         void onFlashlightAvailabilityChanged(boolean available);
+    }
+
+    /**
+     * Returns true if we want to disable torch when screen turns off.
+     */
+    private boolean disableOnScreenOff() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+           Settings.System.DISABLE_TORCH_ON_SCREEN_OFF, 0) == 1;
+    }
+
+    /**
+     * Delay to disable torch when screen turns off.
+     */
+    private int disableOnScreenOffDelay() {
+        return Settings.System.getInt(mContext.getContentResolver(),
+           Settings.System.DISABLE_TORCH_ON_SCREEN_OFF_DELAY, 10);
+    }
+
+    /**
+     * Run the loop until we reach the desired amount of seconds, then kill the torch.
+     * If the screen turns on break out of the loop and post a notification.
+     */
+    private void disableTorchOnScreenOff() {
+        PowerManager pm = (PowerManager)
+                mContext.getSystemService(Context.POWER_SERVICE);
+        for (int i = 1; i < disableOnScreenOffDelay(); i++) {
+            if (pm.isScreenOn()) {
+                break;
+            } else {
+                try {
+                     Thread.sleep(1000);
+                } catch (InterruptedException ie) {}
+            }
+        }
+        if (pm.isScreenOn()) {
+            setNotificationShown(true);
+        } else {
+            setFlashlight(false);
+        }
     }
 }
