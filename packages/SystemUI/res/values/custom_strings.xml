@@ -32,6 +32,9 @@
     <string name="quick_settings_expanded_hide_both">Hide both</string>
     <string name="accessibility_quick_settings_expanded_desktop_off">Expanded desktop disabled</string>
 
+    <!-- Torch detail tile -->
+    <string name="disable_torch_screen_off_title">Disable torch on screen off</string>
+
     <!-- Content description of the brightness tile in quick settings (not shown on the screen). [CHAR LIMIT=NONE] -->
     <string name="accessibility_quick_settings_brightness">Volume panel.</string>
 
