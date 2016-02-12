@@ -6305,13 +6305,6 @@ public final class Settings {
         public static final String HEADS_UP_SHOW_STATUS_BUTTON = "heads_up_show_status_button";
 
         /**
-         * Whether to enable/disable device policy override.
-         * @hide
-         */
-        public static final String ENABLE_DEVICE_POLICY_OVERRIDE
-                = "enable_device_policy_override";
-
-        /**
          * This are the settings to be backed up.
          *
          * NOTE: Settings are backed up and restored in the order they appear
