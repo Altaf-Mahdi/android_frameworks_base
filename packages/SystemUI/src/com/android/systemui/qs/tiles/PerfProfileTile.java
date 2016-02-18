@@ -23,6 +23,7 @@ import android.database.ContentObserver;
 import android.os.Handler;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.provider.Settings.Global;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -90,7 +91,7 @@ public class PerfProfileTile extends QSTile<PerfProfileTile.ProfileState> {
 
     @Override
     protected void handleLongClick() {
-        mHost.startActivityDismissingKeyguard(BATTERY_SETTINGS);
+        setCpuInfoEnabled();
     }
 
     @Override
@@ -233,5 +234,23 @@ public class PerfProfileTile extends QSTile<PerfProfileTile.ProfileState> {
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
             changeToProfile(position);
         }
+    }
+
+    private boolean setCpuInfoEnabled() {
+        boolean enabled = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.SHOW_CPU, 1) != 0;
+        Intent service = (new Intent())
+                .setClassName("com.android.systemui",
+                "com.android.systemui.CPUInfoService");
+        if (!enabled) {
+            Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.SHOW_CPU, 1);
+            mContext.startService(service);
+        } else {
+            Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.SHOW_CPU, 0);
+            mContext.stopService(service);
+        }
+        return enabled;
     }
 }
