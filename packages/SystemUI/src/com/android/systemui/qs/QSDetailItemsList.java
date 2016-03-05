@@ -160,14 +160,8 @@ public class QSDetailItemsList extends LinearLayout {
     public static class QSDetailListAdapter extends ArrayAdapter<QSDetailItems.Item> {
         private QSDetailItems.Callback mCallback;
 
-        private boolean biggerHeight = true;
-
         public QSDetailListAdapter(Context context, List<QSDetailItems.Item> objects) {
             super(context, R.layout.qs_detail_item, objects);
-        }
-
-        public void setBiggerHeight(boolean bool) {
-            biggerHeight = bool;
         }
 
         public void setCallback(QSDetailItems.Callback cb) {
@@ -200,7 +194,7 @@ public class QSDetailItemsList extends LinearLayout {
             summary.setVisibility(twoLines ? VISIBLE : GONE);
             summary.setText(twoLines ? item.line2 : null);
             view.setMinimumHeight(getContext().getResources().getDimensionPixelSize(
-                    twoLines && biggerHeight ? R.dimen.qs_detail_item_height_twoline : R.dimen.qs_detail_item_height));
+                    twoLines ? R.dimen.qs_detail_item_height_twoline : R.dimen.qs_detail_item_height));
 
             final ImageView disconnect = (ImageView) view.findViewById(android.R.id.icon2);
             disconnect.setVisibility(item.canDisconnect ? VISIBLE : GONE);
