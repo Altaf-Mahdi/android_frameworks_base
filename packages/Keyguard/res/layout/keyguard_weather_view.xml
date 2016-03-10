@@ -34,7 +34,8 @@
         android:includeFontPadding="false"
         android:text="@string/weather_info_not_available"
         android:textSize="16sp"
-        android:textColor="@color/keyguard_default_primary_text_color" />
+        android:textColor="@color/keyguard_default_primary_text_color"
+        style="@style/widget_big_thin" />
 
     <LinearLayout
         android:id="@+id/weather_panel"
@@ -57,7 +58,8 @@
                 android:layout_gravity="right"
                 android:includeFontPadding="false"
                 android:textSize="16sp"
-                android:textColor="@color/keyguard_default_primary_text_color" />
+                android:textColor="@color/keyguard_default_primary_text_color"
+                style="@style/widget_big_thin" />
 
             <TextView
                 android:id="@+id/wind"
@@ -66,7 +68,8 @@
                 android:layout_gravity="right"
                 android:includeFontPadding="false"
                 android:textSize="12sp"
-                android:textColor="@color/keyguard_default_secondary_text_color" />
+                android:textColor="@color/keyguard_default_secondary_text_color"
+                style="@style/widget_big_thin" />
 
         </LinearLayout>
 
@@ -103,7 +106,8 @@
                 android:layout_gravity="left"
                 android:includeFontPadding="false"
                 android:textSize="16sp"
-                android:textColor="@color/keyguard_default_primary_text_color" />
+                android:textColor="@color/keyguard_default_primary_text_color"
+                style="@style/widget_big_thin" />
 
             <TextView
                 android:id="@+id/humidity"
@@ -112,7 +116,8 @@
                 android:layout_gravity="left"
                 android:includeFontPadding="false"
                 android:textSize="12sp"
-                android:textColor="@color/keyguard_default_secondary_text_color" />
+                android:textColor="@color/keyguard_default_secondary_text_color"
+                style="@style/widget_big_thin" />
 
         </LinearLayout>
     </LinearLayout>
@@ -124,7 +129,8 @@
         android:layout_gravity="center_horizontal"
         android:includeFontPadding="false"
         android:textSize="14sp"
-        android:textColor="@color/keyguard_default_primary_text_color" />
+        android:textColor="@color/keyguard_default_primary_text_color"
+        style="@style/widget_big_thin" />
 
     <TextView
         android:id="@+id/timestamp"
@@ -133,6 +139,7 @@
         android:layout_gravity="center_horizontal"
         android:includeFontPadding="false"
         android:textSize="8sp"
-        android:textColor="@color/keyguard_default_secondary_text_color" />
+        android:textColor="@color/keyguard_default_secondary_text_color"
+        style="@style/widget_big_thin" />
 
 </LinearLayout>
