@@ -22,6 +22,7 @@ import android.database.ContentObserver;
 import android.net.Uri;
 import android.os.PowerManager;
 import android.provider.Settings;
+import android.provider.Settings.Global;
 
 import com.android.systemui.qs.QSTile;
 import com.android.systemui.R;
@@ -62,7 +63,7 @@ public class BatterySaverTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public void handleLongClick() {
-        mHost.startActivityDismissingKeyguard(BATTERY_SETTINGS);
+        setCpuInfoEnabled();
     }
 
     @Override
@@ -132,5 +133,23 @@ public class BatterySaverTile extends QSTile<QSTile.BooleanState> {
         } else {
             getHost().getBatteryController().removeStateChangedCallback(mBatteryState);
         }
+    }
+
+    private boolean setCpuInfoEnabled() {
+        boolean enabled = Settings.Global.getInt(mContext.getContentResolver(),
+                Settings.Global.SHOW_CPU, 1) != 0;
+        Intent service = (new Intent())
+                .setClassName("com.android.systemui",
+                "com.android.systemui.CPUInfoService");
+        if (!enabled) {
+            Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.SHOW_CPU, 1);
+            mContext.startService(service);
+        } else {
+            Settings.Global.putInt(
+                mContext.getContentResolver(), Settings.Global.SHOW_CPU, 0);
+            mContext.stopService(service);
+        }
+        return enabled;
     }
 }
