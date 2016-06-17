@@ -44,10 +44,6 @@ import java.util.Arrays;
 public class FlashlightTile extends QSTile<QSTile.BooleanState> implements
         FlashlightController.FlashlightListener {
 
-    private static final String TORCH_OFF_ENTRIES_NAME = "torch_screen_off_delay_entries";
-    private static final String TORCH_OFF_VALUES_NAME = "torch_screen_off_delay_values";
-    private static final String SETTINGS_PACKAGE_NAME = "com.android.settings";
-
     private final AnimationIcon mEnable
             = new AnimationIcon(R.drawable.ic_signal_flashlight_enable_animation);
     private final AnimationIcon mDisable
@@ -180,24 +176,9 @@ public class FlashlightTile extends QSTile<QSTile.BooleanState> implements
     };
 
     private void populateList() {
-        try {
-            Context context = mContext.createPackageContext(SETTINGS_PACKAGE_NAME, 0);
-            Resources mSettingsResources = context.getResources();
-            int id = mSettingsResources.getIdentifier(TORCH_OFF_ENTRIES_NAME,
-                    "array", SETTINGS_PACKAGE_NAME);
-            if (id <= 0) {
-                return;
-            }
-            mEntries = mSettingsResources.getStringArray(id);
-            id = mSettingsResources.getIdentifier(TORCH_OFF_VALUES_NAME,
-                    "array", SETTINGS_PACKAGE_NAME);
-            if (id <= 0) {
-                return;
-            }
-            mValues = mSettingsResources.getStringArray(id);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
+        Resources res = mContext.getResources();
+        mEntries = res.getStringArray(R.array.torch_screen_off_delay_entries);
+        mValues = res.getStringArray(R.array.torch_screen_off_delay_values);
     }
 
     private void toggleState() {
