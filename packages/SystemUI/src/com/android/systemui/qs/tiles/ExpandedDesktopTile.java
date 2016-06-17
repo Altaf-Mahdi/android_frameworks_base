@@ -39,8 +39,9 @@ import com.android.systemui.R;
 import com.android.systemui.qs.QSDetailItemsList;
 import com.android.systemui.qs.QSTile;
 
+import com.android.internal.logging.MetricsConstants;
+
 import cyanogenmod.app.StatusBarPanelCustomTile;
-import org.cyanogenmod.internal.logging.CMMetricsLogger;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -105,7 +106,7 @@ public class ExpandedDesktopTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return CMMetricsLogger.TILE_EXPANDED_DESKTOP;
+        return MetricsConstants.TILE_EXPANDED_DESKTOP;
     }
 
     @Override
@@ -277,7 +278,7 @@ public class ExpandedDesktopTile extends QSTile<QSTile.BooleanState> {
 
         @Override
         public int getMetricsCategory() {
-            return CMMetricsLogger.TILE_EXPANDED_DESKTOP;
+            return MetricsConstants.TILE_EXPANDED_DESKTOP;
         }
 
         @Override

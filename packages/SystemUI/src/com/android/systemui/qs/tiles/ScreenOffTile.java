@@ -33,7 +33,7 @@ import android.view.View;
 import com.android.systemui.R;
 import com.android.systemui.qs.QSTile;
 
-import org.cyanogenmod.internal.logging.CMMetricsLogger;
+import com.android.internal.logging.MetricsConstants;
 
 /** Quick settings tile: Screen off **/
 public class ScreenOffTile extends QSTile<QSTile.BooleanState> {
@@ -76,7 +76,7 @@ public class ScreenOffTile extends QSTile<QSTile.BooleanState> {
 
     @Override
     public int getMetricsCategory() {
-        return CMMetricsLogger.TILE_SCREEN_OFF;
+        return MetricsConstants.TILE_SCREEN_OFF;
     }
 
     @Override
