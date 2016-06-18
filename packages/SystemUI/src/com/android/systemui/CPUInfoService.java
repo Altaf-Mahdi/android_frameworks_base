@@ -240,7 +240,7 @@ public class CPUInfoService extends Service {
         private static final String CPU_LP_MODE = "/sys/kernel/debug/clock/cpu_lp/state";
         private static final String CPU_GOV_TAIL = "/cpufreq/scaling_governor";
         private static final String CPU_TEMP_HTC = "/sys/htc/cpu_temp";
-        private static final String CPU_TEMP_OPPO = "/sys/class/thermal/thermal_zone0/temp";
+        private static final String CPU_TEMP_OPPO = "/sys/class/thermal/thermal_zone18/temp";
 
         public CurCPUThread(Handler handler, int numCpus){
             mHandler=handler;
