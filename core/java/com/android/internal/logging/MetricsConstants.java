@@ -263,12 +263,6 @@ public interface MetricsConstants {
     public static final int TUNER_BATTERY_PERCENTAGE = 237;
     public static final int FUELGAUGE_INACTIVE_APPS = 238;
 
-    // Custom
-    public static final int TILE_BRIGHTNESS = 239;
-    public static final int TILE_EXPANDED_DESKTOP = 240;
-    public static final int TILE_SCREEN_OFF = 241;
-    public static final int TILE_SCREENSHOT = 242;
-
     // These constants must match those in the analytic pipeline, do not edit.
     // Add temporary values to the top of MetricsLogger instead.
 
