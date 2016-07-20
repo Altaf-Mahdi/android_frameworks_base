@@ -100,8 +100,8 @@ public class LockscreenToggleTile extends QSTile<QSTile.BooleanState>
             state.enabled = false;
         } else {
             final boolean lockscreenEnforced = mediator.lockscreenEnforcedByDevicePolicy();
-            final boolean lockscreenEnabled = lockscreenEnforced ||
-                    arg != null ? (Boolean) arg : mediator.getKeyguardEnabledInternal();
+            final boolean lockscreenEnabled = arg != null
+                    ? (Boolean) arg : mediator.getKeyguardEnabledInternal();
 
             state.visible = mediator.isKeyguardBound();
 
@@ -118,7 +118,6 @@ public class LockscreenToggleTile extends QSTile<QSTile.BooleanState>
             } else {
                 state.value = lockscreenEnabled;
                 state.enabled = !mKeyguard.isShowing() || !mKeyguard.isSecure();
-
                 state.label = mContext.getString(R.string.quick_settings_lockscreen_label);
             }
             // update icon
